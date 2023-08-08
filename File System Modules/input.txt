@@ -1,0 +1,11 @@
+File Extension: In the code you provided, you're trying to read a file named input.txt. 
+Make sure that the file is indeed named input.txt and has the correct extension. 
+If it's named differently, update the filename in your fs.readFile function.
+
+Check Error Output: The error message you provided mentions Cannot find module 
+'./Sport.jsx', which seems unrelated to the code you've posted. 
+Verify that there are no typos or mistakes in your command line when running the script.
+
+Use __dirname: To ensure that the file path is correct,
+ you can use the __dirname global variable to get the directory of the 
+ currently executing script. Modify your code like this:
