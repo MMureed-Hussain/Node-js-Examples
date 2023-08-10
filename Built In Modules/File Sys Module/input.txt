@@ -1,0 +1,4 @@
+Use __dirname: To ensure that the file path is correct,
+ you can use the __dirname global variable to get the directory of the 
+ currently executing script. Modify your code like this:
+***********************************
