@@ -14,24 +14,162 @@
     />
 
     <title></title>
+    <style>
+      .custom-card-body {
+        width: 80%;
+        /* You can add more styles here */
+      }
+    </style>
   </head>
   <body>
     <div class="container">
       <h1 class="text-center mt-3 mb-3"><%= title %></h1>
 
-      <% if(action == 'add') { %> <% } else { %>
+      <% if(action == 'add') { %>
+      <div class="card">
+        <div class="card-header">Sample Form</div>
+        <div class="card-body">
+          <form method="POST" action="/sample_data/add_sample_data">
+            <div class="col justify-content-center align items center">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label>Id</label>
+                  <input type="number" name="id" id="id" class="form-control" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label>First Name</label>
+                  <input
+                    type="text"
+                    name="FirstName"
+                    id="first_name"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label>Last Name</label>
+                  <input
+                    type="text"
+                    name="LastName"
+                    id="last_name"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label>Age</label>
+                  <input
+                    type="number"
+                    name="Age"
+                    id="age"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <input
+                type="submit"
+                name="submit_button"
+                class="btn btn-primary"
+                value="Add"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <% }else if(action=='edit'){ %>
+      <div class="card">
+        <div class="card-header">Sample Data</div>
+        <div class="card-body">
+          <form method="POST" action="/sample_data/edit/<%= sampleData.id %>">
+            <div class="col justify-content-center align items center">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label>Id</label>
+                  <input
+                    type="number"
+                    name="id"
+                    id="id"
+                    class="form-control"
+                    value="<%= sampleData.id %>"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label>First Name</label>
+                  <input
+                    type="text"
+                    name="FirstName"
+                    id="first_name"
+                    class="form-control"
+                    value="<%= sampleData.FirstName %>"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label>Last Name</label>
+                  <input
+                    type="text"
+                    name="LastName"
+                    id="last_name"
+                    class="form-control"
+                    value="<%= sampleData.LastName %>"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label>Age</label>
+                  <input
+                    type="number"
+                    name="Age"
+                    id="age"
+                    class="form-control"
+                    value="<%= sampleData.Age %>"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <input
+                type="submit"
+                name="submit_button"
+                class="btn btn-primary"
+                value="Edit"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <% } else { %>
 
       <div class="card">
         <div class="card-header">
           <div class="row">
             <div class="col">Sample Data</div>
-            <div class="col"></div>
+            <div class="col">
+              <a
+                href="/sample_data/add"
+                class="btn btn-success btn-sm float-end"
+                >Add</a
+              >
+            </div>
           </div>
         </div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered">
               <tr>
+                <th>Id</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Age</th>
@@ -40,10 +178,17 @@
               <% if(sampleData.length > 0) { sampleData.forEach(function(data){
               %>
               <tr>
+                <td><%= data.id %></td>
                 <td><%= data.FirstName %></td>
                 <td><%= data.LastName %></td>
                 <td><%= data.Age %></td>
-                <td></td>
+                <td>
+                  <a
+                    href="/sample_data/edit/<%=data.id %>"
+                    class="btn btn-primary btn-sm"
+                    >Edit</a
+                  >
+                </td>
               </tr>
               <% }); } else { %>
               <tr>
@@ -58,7 +203,7 @@
       <% } %>
     </div>
 
-    <script 
+    <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
